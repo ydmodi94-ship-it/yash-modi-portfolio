@@ -4,7 +4,7 @@ import { navLinks, RESUME_URL, track } from "@/lib/site";
 
 export function Footer() {
   return (
-    <footer className="hairline mt-8 bg-background">
+    <footer className="no-print hairline mt-8 bg-background">
       <div className="shell grid gap-10 py-14 md:grid-cols-[1.4fr_1fr_1fr] md:py-16">
         <div className="min-w-0">
           <p className="text-base font-semibold tracking-tight">{profile.name}</p>

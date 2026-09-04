@@ -21,7 +21,7 @@ export function Navbar() {
   }, [open]);
 
   return (
-    <header className="sticky top-0 z-50 border-b border-border/70 bg-background/85 backdrop-blur-md">
+    <header className="no-print sticky top-0 z-50 border-b border-border/70 bg-background/85 backdrop-blur-md">
       <nav
         aria-label="Primary"
         className="shell flex h-16 items-center justify-between gap-4 md:h-18"
