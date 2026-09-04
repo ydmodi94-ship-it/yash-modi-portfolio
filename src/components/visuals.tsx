@@ -73,7 +73,7 @@ export function HeroVisual() {
         {stages.map((s, i) => (
           <text
             key={s}
-            x={28 + i * 100}
+            x={22 + i * 88}
             y="276"
             fill={muted}
             fontSize="10"
