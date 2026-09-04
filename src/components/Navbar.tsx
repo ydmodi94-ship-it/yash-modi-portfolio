@@ -46,7 +46,7 @@ export function Navbar() {
                 to={link.to}
                 className={cn(
                   "rounded-md px-3 py-2 text-sm text-muted-foreground transition-colors hover:text-foreground",
-                  pathname.startsWith(link.to) && link.to !== "/" && "text-foreground",
+                  pathname.startsWith(link.to) && "text-foreground",
                 )}
                 activeProps={{ className: "text-foreground font-medium" }}
               >

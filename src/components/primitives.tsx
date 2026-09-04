@@ -1,4 +1,4 @@
-import { Link } from "@tanstack/react-router";
+import { Link, type LinkComponentProps } from "@tanstack/react-router";
 import type { ComponentProps, ReactNode } from "react";
 import { cn } from "@/lib/utils";
 
@@ -25,23 +25,13 @@ type CtaProps = {
 };
 
 export function CtaLink({
-  to,
-  hash,
   variant = "primary",
   className,
   children,
   ...rest
-}: CtaProps & { to: string; hash?: string } & Omit<
-    ComponentProps<typeof Link>,
-    "to" | "className" | "children"
-  >) {
+}: CtaProps & LinkComponentProps<"a">) {
   return (
-    <Link
-      to={to}
-      hash={hash}
-      className={cn(base, variants[variant], className)}
-      {...(rest as object)}
-    >
+    <Link className={cn(base, variants[variant], className)} {...rest}>
       {children}
     </Link>
   );

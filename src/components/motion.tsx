@@ -69,7 +69,7 @@ export function CountUp({
   duration = 1400,
 }: {
   value: number | null;
-  display?: string;
+  display?: string | undefined;
   duration?: number;
 }) {
   const reduced = usePrefersReducedMotion();
