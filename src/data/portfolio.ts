@@ -18,7 +18,7 @@ export const proofMetrics = [
   { value: 4, suffix: "", label: "Classification Models Benchmarked", context: "Logistic · Tree · Forest · Boosting" },
   { value: 5, suffix: "", label: "Evaluation Metrics", context: "Accuracy · Precision · Recall · F1 · ROC-AUC" },
   { value: 5000, suffix: "", label: "Monte Carlo Trials per Prediction", context: "CricAnalytics simulation engine" },
-  { value: 1, suffix: "st", label: "Rank · Gold Medal", context: "Industrial Defect Reduction project" },
+  { value: 75, suffix: "%", label: "Defect Rate Reduction", context: "Lean Six Sigma DMAIC study — 8% to 2%" },
   { value: null, display: "GCP", label: "Cloud Deployment", context: "Google Cloud Run" },
 ] as const;
 
