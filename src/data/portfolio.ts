@@ -179,7 +179,7 @@ export const education = [
 export const achievements = [
   {
     headline: "Gold Medal · 1st Rank",
-    body: "Awarded for the Industrial Defect Reduction Analysis project carried out on real manufacturing data.",
+    body: "Awarded for the Defect Reduction & Operational Efficiency study at Atlanta Electricals Pvt. Ltd., which cut the defect rate from 8% to 2% and monthly cost of poor quality from ₹76,000 to ₹22,000.",
   },
   {
     headline: "First Rank in Class",
