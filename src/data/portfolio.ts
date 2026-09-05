@@ -323,6 +323,7 @@ export const projects: Project[] = [
         body: "The output is a ranked, explained and segmented view of retention risk with a suggested action per customer — the format a retention or risk function can act on directly. This is a self-directed project built on a retail banking dataset; it has not been deployed inside a bank.",
       },
     ],
+    github: "https://github.com/ydmodi94-ship-it/shap-banking-risk-profiler",
   },
   {
     slug: "cricanalytics",
@@ -383,6 +384,7 @@ export const projects: Project[] = [
         body: "The same pattern — simulate, quantify uncertainty, test significance, visualize — applies directly to demand forecasting, risk simulation and scenario planning in a commercial setting.",
       },
     ],
+    github: "https://github.com/ydmodi94-ship-it/cricket-modelling-ipl",
   },
   {
     slug: "industrial-defect-reduction",

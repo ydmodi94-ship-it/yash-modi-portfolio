@@ -5,7 +5,7 @@ import { profile } from "@/data/portfolio";
  * "/yash-modi-resume.pdf" to switch every "Download Resume" CTA on.
  * While it is null the CTA is hidden rather than rendered as a dead link.
  */
-export const RESUME_URL: string | null = null;
+export const RESUME_URL: string | null = "/yash-modi-resume.pdf";
 
 /** Analytics-ready event hook. No tracking is wired up by default. */
 export type AnalyticsEvent =
