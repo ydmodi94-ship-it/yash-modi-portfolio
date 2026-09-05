@@ -177,22 +177,31 @@ export function MonteCarloVisual() {
 }
 
 export function ParetoVisual() {
-  const bars = [42, 26, 15, 9, 5, 3];
+  const items = [
+    { label: "Workmanship", count: 41 },
+    { label: "Design", count: 26 },
+    { label: "Material", count: 22 },
+    { label: "Assembly", count: 17 },
+    { label: "Testing", count: 9 },
+    { label: "Others", count: 5 },
+  ];
+  const total = items.reduce((s, i) => s + i.count, 0);
   let cum = 0;
-  const cumulative = bars.map((b) => (cum += b));
+  const cumulative = items.map((i) => (cum += (i.count / total) * 100));
+  const maxCount = 41;
   return (
     <figure>
       <svg
-        viewBox="0 0 400 180"
+        viewBox="0 0 400 200"
         role="img"
-        aria-label="Illustrative Pareto chart ranking defect causes with a cumulative percentage line."
+        aria-label="Pareto chart of 120 recorded defects ranked by type, with a cumulative percentage line showing the top two types at 56 percent."
         className="w-full"
       >
-        {bars.map((b, i) => {
-          const h = (b / 50) * 130;
+        {items.map((it, i) => {
+          const h = (it.count / maxCount) * 120;
           return (
             <rect
-              key={i}
+              key={it.label}
               x={20 + i * 62}
               y={150 - h}
               width="42"
@@ -203,6 +212,19 @@ export function ParetoVisual() {
             />
           );
         })}
+        {items.map((it, i) => (
+          <text
+            key={`c-${it.label}`}
+            x={41 + i * 62}
+            y={150 - (it.count / maxCount) * 120 - 6}
+            fontSize="10"
+            textAnchor="middle"
+            fill={muted}
+            fontFamily="var(--font-mono)"
+          >
+            {it.count}
+          </text>
+        ))}
         <path
           className="draw-line"
           d={cumulative
@@ -216,19 +238,34 @@ export function ParetoVisual() {
           <circle key={i} cx={41 + i * 62} cy={150 - (c / 100) * 140} r="2.6" fill={ink} />
         ))}
         <line x1="14" y1="152" x2="392" y2="152" stroke={stroke} />
-        <text x="14" y="172" fontSize="9" fill={muted} fontFamily="var(--font-mono)">
-          RANKED ROOT CAUSES
+        {items.map((it, i) => (
+          <text
+            key={`l-${it.label}`}
+            x={41 + i * 62}
+            y="166"
+            fontSize="8"
+            textAnchor="middle"
+            fill={muted}
+            fontFamily="var(--font-mono)"
+          >
+            {it.label.toUpperCase()}
+          </text>
+        ))}
+        <text x="14" y="188" fontSize="9" fill={muted} fontFamily="var(--font-mono)">
+          120 DEFECTS RECORDED
         </text>
-        <text x="290" y="172" fontSize="9" fill={muted} fontFamily="var(--font-mono)">
-          CUMULATIVE %
+        <text x="272" y="188" fontSize="9" fill={muted} fontFamily="var(--font-mono)">
+          TOP 2 = 56% CUMULATIVE
         </text>
       </svg>
       <figcaption className="mt-4 text-xs text-muted-foreground">
-        Illustrative Pareto structure — shape only, not the study&apos;s recorded values.
+        Pareto ranking of the 120 recorded defect events at Atlanta Electricals — workmanship
+        and design issues alone account for 56% of all defects.
       </figcaption>
     </figure>
   );
 }
+
 
 export function ClassificationVisual() {
   const cells = [

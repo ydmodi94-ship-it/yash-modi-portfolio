@@ -124,7 +124,7 @@ export function Card({
 
 export function Tag({ children }: { children: ReactNode }) {
   return (
-    <span className="rounded-full border border-border bg-background px-3 py-1 text-xs font-medium text-muted-foreground">
+    <span className="rounded-full border border-border bg-background px-3 py-1 text-xs font-medium text-muted-foreground transition-colors hover:border-primary/30 hover:text-foreground">
       {children}
     </span>
   );
@@ -138,7 +138,7 @@ export function Stat({
   label: string;
 }) {
   return (
-    <div className="min-w-0">
+    <div className="min-w-0 border-t border-border pt-3">
       <div className="font-mono text-2xl font-semibold tracking-tight text-foreground md:text-3xl">
         {value}
       </div>

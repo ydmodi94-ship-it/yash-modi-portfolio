@@ -22,11 +22,30 @@ import { mailto, RESUME_URL, track } from "@/lib/site";
 export function Hero() {
   return (
     <section className="relative overflow-hidden border-b border-border">
-      <div className="shell grid items-center gap-12 py-16 md:py-24 lg:grid-cols-[1.15fr_1fr] lg:gap-16 lg:py-28">
+      <div
+        aria-hidden="true"
+        className="grid-motif pointer-events-none absolute inset-0 opacity-[0.55] [mask-image:radial-gradient(120%_80%_at_70%_0%,black,transparent_70%)]"
+      />
+      <div
+        aria-hidden="true"
+        className="pointer-events-none absolute -top-40 right-[-10%] h-[32rem] w-[32rem] rounded-full bg-[radial-gradient(circle,color-mix(in_oklab,var(--primary)_16%,transparent),transparent_65%)] blur-2xl"
+      />
+      <div className="shell relative grid items-center gap-12 py-16 md:py-24 lg:grid-cols-[1.15fr_1fr] lg:gap-16 lg:py-28">
         <div className="min-w-0">
-          <p className="label-mono">{profile.shortTitle}</p>
-          <h1 className="display-1 mt-6 text-balance">
-            I build intelligent systems that turn data into decisions.
+          <p className="inline-flex items-center gap-2 rounded-full border border-border bg-surface px-3 py-1.5 text-xs font-medium text-muted-foreground">
+            <span className="relative flex h-1.5 w-1.5">
+              <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-success opacity-70" />
+              <span className="relative inline-flex h-1.5 w-1.5 rounded-full bg-success" />
+            </span>
+            Open to Data Science &amp; AI/ML roles
+          </p>
+          <p className="label-mono mt-5">{profile.shortTitle}</p>
+          <h1 className="display-1 mt-5 text-balance">
+            I build intelligent systems that turn data into{" "}
+            <span className="bg-[linear-gradient(180deg,transparent_66%,color-mix(in_oklab,var(--primary)_22%,transparent)_66%)]">
+              decisions
+            </span>
+            .
           </h1>
           <p className="body-lg mt-7 max-w-xl text-muted-foreground text-pretty">
             I work across machine learning, statistical analytics and predictive
@@ -35,6 +54,7 @@ export function Hero() {
             generative AI layered into applications people can actually use.
           </p>
           <p className="mt-4 text-sm text-muted-foreground">{profile.disciplines}</p>
+
 
           <div className="mt-9 flex flex-wrap gap-3">
             <CtaLink
