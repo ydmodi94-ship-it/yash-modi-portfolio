@@ -7,7 +7,14 @@ export function Footer() {
     <footer className="no-print hairline mt-8 bg-background">
       <div className="shell grid gap-10 py-14 md:grid-cols-[1.4fr_1fr_1fr] md:py-16">
         <div className="min-w-0">
-          <p className="text-base font-semibold tracking-tight">{profile.name}</p>
+          <Link to="/" className="inline-block">
+            <img
+              src="/logo.png"
+              alt="Yash Modi Logo"
+              className="h-10 w-auto opacity-90 transition-opacity hover:opacity-100"
+            />
+          </Link>
+          <p className="mt-4 text-base font-semibold tracking-tight">{profile.name}</p>
           <p className="mt-1 text-sm text-muted-foreground">{profile.shortTitle}</p>
           <p className="mt-1 text-sm text-muted-foreground">{profile.location}</p>
           <p className="mt-5 max-w-sm text-sm text-muted-foreground">

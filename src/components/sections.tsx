@@ -1,5 +1,6 @@
 import { Link } from "@tanstack/react-router";
-import { ArrowUpRight, Github, Linkedin, Mail } from "lucide-react";
+import { ArrowUpRight, ChevronDown, Github, Linkedin, Mail, MapPin, Clock, Briefcase } from "lucide-react";
+import { useState } from "react";
 import {
   achievements,
   certifications,
@@ -16,8 +17,109 @@ import { CountUp, Reveal } from "@/components/motion";
 import { Arrow, Card, CtaAnchor, CtaLink, SectionHeading, Stat, Tag } from "@/components/primitives";
 import { HeroVisual, ProjectVisual } from "@/components/visuals";
 import { mailto, RESUME_URL, track } from "@/lib/site";
+import { cn } from "@/lib/utils";
 
 /* ------------------------------- Hero ------------------------------- */
+
+function AvailabilityBadge() {
+  const [open, setOpen] = useState(false);
+
+  const roles = [
+    "Data Scientist",
+    "AI / ML Engineer",
+    "Machine Learning Engineer",
+    "Data Analyst (Advanced)",
+    "Applied AI Engineer",
+    "NLP / Generative AI Engineer",
+  ];
+
+  return (
+    <div className="min-w-0">
+      <button
+        type="button"
+        onClick={() => setOpen((v) => !v)}
+        aria-expanded={open}
+        aria-controls="availability-panel"
+        className="group inline-flex items-center gap-2 rounded-full border border-border bg-surface px-3 py-1.5 text-xs font-medium text-muted-foreground transition-all hover:border-success/40 hover:bg-[color-mix(in_oklab,var(--success)_6%,var(--surface))] hover:text-foreground"
+      >
+        <span className="relative flex h-1.5 w-1.5">
+          <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-success opacity-70" />
+          <span className="relative inline-flex h-1.5 w-1.5 rounded-full bg-success" />
+        </span>
+        <span>Open to Data Science &amp; AI/ML roles</span>
+        <ChevronDown
+          size={12}
+          className={cn(
+            "transition-transform duration-200",
+            open && "rotate-180 text-success",
+          )}
+          aria-hidden="true"
+        />
+      </button>
+
+      <div
+        id="availability-panel"
+        hidden={!open}
+        className="hairline mt-3 overflow-hidden rounded-2xl border border-success/15 bg-[color-mix(in_oklab,var(--success)_5%,var(--background))] shadow-[var(--shadow-card)] backdrop-blur-sm"
+      >
+        <div className="grid gap-5 p-5 sm:grid-cols-3">
+          <div className="min-w-0">
+            <div className="flex items-center gap-2 text-[11px] font-medium uppercase tracking-wider text-success">
+              <Briefcase size={12} />
+              <span>Roles of Interest</span>
+            </div>
+            <ul className="mt-3 space-y-1.5">
+              {roles.slice(0, 3).map((r) => (
+                <li
+                  key={r}
+                  className="text-sm text-foreground flex items-center gap-2"
+                >
+                  <span className="h-1 w-1 rounded-full bg-primary" />
+                  {r}
+                </li>
+              ))}
+              <li className="text-xs text-muted-foreground pl-3">
+                + {roles.length - 3} more
+              </li>
+            </ul>
+          </div>
+
+          <div className="min-w-0">
+            <div className="flex items-center gap-2 text-[11px] font-medium uppercase tracking-wider text-success">
+              <MapPin size={12} />
+              <span>Location</span>
+            </div>
+            <p className="mt-3 text-sm text-foreground">Bharuch, Gujarat, India</p>
+            <p className="mt-1 text-xs text-muted-foreground">
+              Open to Remote · Hybrid · Relocation
+            </p>
+          </div>
+
+          <div className="min-w-0 sm:col-span-1 col-span-1">
+            <div className="flex items-center gap-2 text-[11px] font-medium uppercase tracking-wider text-success">
+              <Clock size={12} />
+              <span>Availability</span>
+            </div>
+            <p className="mt-3 text-sm font-semibold text-foreground">Immediate Joining</p>
+            <div className="mt-4">
+              <CtaAnchor
+                href={mailto}
+                variant="primary"
+                className="w-full justify-center !py-2 text-xs"
+                onClick={() => track("contact_click", { source: "availability_badge" })}
+              >
+                <Mail size={12} />
+                Reach Out Now
+              </CtaAnchor>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+
 
 export function Hero() {
   return (
@@ -32,21 +134,18 @@ export function Hero() {
       />
       <div className="shell relative grid items-center gap-12 py-16 md:py-24 lg:grid-cols-[1.15fr_1fr] lg:gap-16 lg:py-28">
         <div className="min-w-0">
-          <p className="inline-flex items-center gap-2 rounded-full border border-border bg-surface px-3 py-1.5 text-xs font-medium text-muted-foreground">
-            <span className="relative flex h-1.5 w-1.5">
-              <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-success opacity-70" />
-              <span className="relative inline-flex h-1.5 w-1.5 rounded-full bg-success" />
-            </span>
-            Open to Data Science &amp; AI/ML roles
-          </p>
+          <AvailabilityBadge />
+
           <p className="label-mono mt-5">{profile.shortTitle}</p>
-          <h1 className="display-1 mt-5 text-balance">
+
+          <h1 className="display-1 mt-5 text-balance leading-[1.08]">
             I build intelligent systems that turn data into{" "}
-            <span className="bg-[linear-gradient(180deg,transparent_66%,color-mix(in_oklab,var(--primary)_22%,transparent)_66%)]">
+            <span className="bg-[linear-gradient(180deg,transparent_68%,color-mix(in_oklab,var(--primary)_22%,transparent)_68%)]">
               decisions
             </span>
             .
           </h1>
+
           <p className="body-lg mt-7 max-w-xl text-muted-foreground text-pretty">
             I work across machine learning, statistical analytics and predictive
             modelling — from automated ETL and feature engineering through model

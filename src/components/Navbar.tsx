@@ -30,12 +30,11 @@ export function Navbar() {
           to="/"
           className="flex min-w-0 items-center gap-2.5 text-sm font-semibold tracking-tight"
         >
-          <span
-            aria-hidden="true"
-            className="grid h-7 w-7 shrink-0 place-items-center rounded-md bg-foreground font-mono text-[11px] text-background"
-          >
-            YM
-          </span>
+          <img
+            src="/logo.png"
+            alt="Yash Modi Logo"
+            className="h-8 w-auto shrink-0"
+          />
           <span className="truncate">Yash Modi</span>
         </Link>
 
