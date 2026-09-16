@@ -15,11 +15,37 @@ import {
 } from "@/data/portfolio";
 import { CountUp, Reveal } from "@/components/motion";
 import { Arrow, Card, CtaAnchor, CtaLink, SectionHeading, Stat, Tag } from "@/components/primitives";
-import { HeroVisual, ProjectVisual } from "@/components/visuals";
+import { ProjectVisual } from "@/components/visuals";
 import { mailto, RESUME_URL, track } from "@/lib/site";
 import { cn } from "@/lib/utils";
 
 /* ------------------------------- Hero ------------------------------- */
+
+function HeroPortrait() {
+  return (
+    <figure className="relative mx-auto w-full max-w-sm lg:max-w-none">
+      <div className="overflow-hidden rounded-2xl border border-border bg-surface shadow-[var(--shadow-card)]">
+        <img
+          src="/Professional.jpeg"
+          alt="Yash Modi in a navy suit for his professional portfolio."
+          className="aspect-[4/5] w-full object-cover object-[center_20%]"
+          loading="eager"
+          fetchPriority="high"
+          decoding="async"
+          width={800}
+          height={1000}
+        />
+      </div>
+      <figcaption className="mt-4 flex items-center justify-between text-[11px] uppercase tracking-[0.18em] text-muted-foreground">
+        <span className="font-mono">{profile.location}</span>
+        <span className="inline-flex items-center gap-1.5 font-mono text-data">
+          <span className="h-1 w-1 rounded-full bg-data" />
+          Available
+        </span>
+      </figcaption>
+    </figure>
+  );
+}
 
 function AvailabilityBadge() {
   const [open, setOpen] = useState(false);
@@ -184,8 +210,9 @@ export function Hero() {
           </p>
         </div>
 
-        <div className="min-w-0">
-          <HeroVisual />
+        {/* Portrait: below CTAs on mobile, right column on desktop */}
+        <div className="min-w-0 order-last sm:order-last lg:order-last">
+          <HeroPortrait />
         </div>
       </div>
     </section>
@@ -370,23 +397,57 @@ export function SelectedWork() {
 export function ThinkingFramework() {
   return (
     <section className="border-y border-border bg-surface">
-      <div className="shell section-y">
-        <SectionHeading
-          eyebrow="How I Think"
-          title="From Problem to Decision"
-          lead="A consistent path from an unclear business question to an explained, deployed output someone can act on."
-        />
-        <ol className="mt-14 grid gap-px overflow-hidden rounded-xl border border-border bg-border sm:grid-cols-2 lg:grid-cols-4">
-          {thinkingFramework.map((s, i) => (
-            <li key={s.step} className="bg-surface p-6 md:p-7">
-              <Reveal delay={i * 40}>
-                <span className="font-mono text-xs text-primary">{s.step}</span>
-                <h3 className="mt-3 text-base font-semibold tracking-tight">{s.title}</h3>
-                <p className="mt-2.5 text-sm leading-relaxed text-muted-foreground">{s.body}</p>
-              </Reveal>
-            </li>
-          ))}
-        </ol>
+      <div className="shell section-y grid gap-12 lg:grid-cols-[1.05fr_0.95fr] lg:gap-16 items-start">
+        <div className="min-w-0 order-2 lg:order-1">
+          <SectionHeading
+            eyebrow="How I Work"
+            title="Curious by nature. Analytical by discipline."
+            lead="A consistent approach from an unclear business question to an explained, deployed output someone can act on."
+          />
+          <ol className="mt-12 grid gap-px overflow-hidden rounded-xl border border-border bg-border sm:grid-cols-2">
+            {thinkingFramework.slice(0, 6).map((s, i) => (
+              <li key={s.step} className="bg-surface p-5 md:p-6">
+                <Reveal delay={i * 40}>
+                  <span className="font-mono text-xs text-primary">{s.step}</span>
+                  <h3 className="mt-3 text-base font-semibold tracking-tight">{s.title}</h3>
+                  <p className="mt-2.5 text-sm leading-relaxed text-muted-foreground">{s.body}</p>
+                </Reveal>
+              </li>
+            ))}
+          </ol>
+          <ol className="mt-px grid gap-px overflow-hidden rounded-xl border border-border bg-border sm:grid-cols-2">
+            {thinkingFramework.slice(6).map((s, i) => (
+              <li key={s.step} className="bg-surface p-5 md:p-6">
+                <Reveal delay={i * 40}>
+                  <span className="font-mono text-xs text-primary">{s.step}</span>
+                  <h3 className="mt-3 text-base font-semibold tracking-tight">{s.title}</h3>
+                  <p className="mt-2.5 text-sm leading-relaxed text-muted-foreground">{s.body}</p>
+                </Reveal>
+              </li>
+            ))}
+          </ol>
+        </div>
+
+        {/* Office visual: below content on mobile, right column on desktop */}
+        <div className="min-w-0 order-1 lg:order-2 lg:sticky lg:top-24">
+          <figure className="relative mx-auto w-full max-w-md lg:max-w-none">
+            <div className="overflow-hidden rounded-2xl border border-border bg-background shadow-[var(--shadow-card)]">
+              <img
+                src="/Office.jpeg"
+                alt="Yash Modi in a professional work environment."
+                className="aspect-[4/5] w-full object-cover object-[center_30%]"
+                loading="lazy"
+                decoding="async"
+                width={900}
+                height={1125}
+              />
+            </div>
+            <figcaption className="mt-4 flex items-center justify-between text-[11px] uppercase tracking-[0.18em] text-muted-foreground">
+              <span className="font-mono">Work · Context</span>
+              <span className="font-mono text-primary">Focused · Deliberate</span>
+            </figcaption>
+          </figure>
+        </div>
       </div>
     </section>
   );
@@ -406,13 +467,18 @@ const journey = [
 export function AboutSection({ compact = false }: { compact?: boolean }) {
   return (
     <section id="about" className={compact ? "" : "section-y"}>
-      <div className="shell grid gap-12 lg:grid-cols-[1fr_0.85fr] lg:gap-20">
-        <div className="min-w-0">
+      <div className="shell grid gap-12 lg:grid-cols-[1.1fr_0.9fr] lg:gap-20 items-start">
+        <div className="min-w-0 order-2 lg:order-1">
           <SectionHeading
-            eyebrow="About"
+            eyebrow="About Yash"
             title="A quantitative foundation in Physics. A practical focus in Data Science."
           />
           <div className="mt-7 space-y-5 text-muted-foreground body-lg">
+            <p>
+              I'm Yash Modi — a Data Scientist and AI/ML Engineer from Bharuch, Gujarat.
+              I build systems that take noisy, real-world data and turn it into explained,
+              actionable decisions recruiters, stakeholders and decision-makers can trust.
+            </p>
             <p>
               I trained as a physicist — an M.Sc. in Spectroscopy built on statistical
               analysis, quantitative reasoning and the interpretation of experimental data.
@@ -426,30 +492,91 @@ export function AboutSection({ compact = false }: { compact?: boolean }) {
               simulation and open-data classification.
             </p>
             <p>
-              What I care about now is the last mile — the point where a model stops being
-              a score and becomes an explained, segmented, actionable recommendation
-              someone is willing to sign off on.
+              <span className="text-foreground font-medium">
+                Turning complex data into structured thinking, practical analysis, and meaningful decisions.
+              </span>
             </p>
+          </div>
+
+          {/* recruiter-friendly scannable groups */}
+          <div className="mt-10 grid gap-5 sm:grid-cols-2">
+            <div className="min-w-0">
+              <p className="label-mono mb-3">Education</p>
+              <ul className="space-y-3">
+                {[education[0], education[1]].map((e) => (
+                  <li key={e.degree} className="min-w-0">
+                    <p className="text-sm font-semibold text-foreground">{e.degree}</p>
+                    <p className="mt-0.5 text-xs text-muted-foreground">{e.institution}</p>
+                    <p className="mt-1 text-xs font-medium text-primary">{e.detail}</p>
+                  </li>
+                ))}
+              </ul>
+            </div>
+            <div className="min-w-0">
+              <p className="label-mono mb-3">Technical Focus</p>
+              <ul className="flex flex-wrap gap-2">
+                {[
+                  "Machine Learning",
+                  "Statistical Modelling",
+                  "Predictive Analytics",
+                  "Explainable AI",
+                  "Generative AI",
+                  "Monte Carlo Simulation",
+                  "ETL & Feature Engineering",
+                  "Cloud Deployment",
+                ].map((t) => (
+                  <li key={t}>
+                    <Tag>{t}</Tag>
+                  </li>
+                ))}
+              </ul>
+              <p className="label-mono mt-6 mb-3">Domains</p>
+              <p className="text-sm text-muted-foreground">
+                Banking Risk · Sports Intelligence · Manufacturing Quality · Open-Data Classification
+              </p>
+            </div>
+          </div>
+
+          <div className="mt-10">
+            <p className="label-mono mb-3">Working Approach</p>
+            <ol className="relative space-y-4 border-l border-border pl-6">
+              {journey.map((j, i) => (
+                <li key={j} className="relative">
+                  <span
+                    aria-hidden="true"
+                    className="absolute -left-[1.9rem] top-2 h-2 w-2 rounded-full"
+                    style={{
+                      background: i === journey.length - 1 ? "var(--primary)" : "var(--data)",
+                    }}
+                  />
+                  <div className="rounded-lg border border-border bg-surface px-4 py-3 text-sm font-medium">
+                    {j}
+                  </div>
+                </li>
+              ))}
+            </ol>
           </div>
         </div>
 
-        <div className="min-w-0">
-          <ol className="relative space-y-4 border-l border-border pl-6">
-            {journey.map((j, i) => (
-              <li key={j} className="relative">
-                <span
-                  aria-hidden="true"
-                  className="absolute -left-[1.9rem] top-2 h-2 w-2 rounded-full"
-                  style={{
-                    background: i === journey.length - 1 ? "var(--primary)" : "var(--data)",
-                  }}
-                />
-                <div className="rounded-lg border border-border bg-surface px-4 py-3 text-sm font-medium">
-                  {j}
-                </div>
-              </li>
-            ))}
-          </ol>
+        {/* Portrait: below content on mobile, right column on desktop */}
+        <div className="min-w-0 order-1 lg:order-2 lg:sticky lg:top-24">
+          <figure className="relative mx-auto w-full max-w-md lg:max-w-none">
+            <div className="overflow-hidden rounded-2xl border border-border bg-surface shadow-[var(--shadow-card)]">
+              <img
+                src="/AboutPhoto.jpeg"
+                alt="Yash Modi professional portrait."
+                className="aspect-[3/4] w-full object-cover object-[center_15%]"
+                loading="lazy"
+                decoding="async"
+                width={1200}
+                height={1600}
+              />
+            </div>
+            <figcaption className="mt-4 flex items-center justify-between text-[11px] uppercase tracking-[0.18em] text-muted-foreground">
+              <span className="font-mono">{profile.name}</span>
+              <span className="font-mono text-primary">{profile.shortTitle}</span>
+            </figcaption>
+          </figure>
         </div>
       </div>
     </section>
