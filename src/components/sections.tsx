@@ -11,6 +11,8 @@ import {
   proofMetrics,
   thinkingFramework,
   toolkit,
+  dashboards,
+  type Dashboard,
   type Project,
 } from "@/data/portfolio";
 import { CountUp, Reveal } from "@/components/motion";
@@ -389,6 +391,98 @@ export function SelectedWork() {
         ) : null}
       </div>
     </section>
+  );
+}
+
+/* -------------------------- Dashboards -------------------------- */
+
+export function DashboardsSection() {
+  if (dashboards.length === 0) return null;
+
+  return (
+    <section id="dashboards" className="section-y bg-surface border-t border-border">
+      <div className="shell">
+        <SectionHeading
+          eyebrow="Dashboards & BI"
+          title="Dashboards & Business Intelligence"
+          lead="Turning raw data into clear insights through data visualization, interactive reporting, and analytical storytelling."
+        />
+
+        <div className="mt-14 grid gap-8 md:grid-cols-2">
+          {dashboards.map((d) => (
+            <Reveal key={d.id} className="h-full">
+              <DashboardCard dashboard={d} />
+            </Reveal>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function DashboardCard({ dashboard }: { dashboard: Dashboard }) {
+  return (
+    <Card className="flex h-full flex-col overflow-hidden p-0">
+      <div className="relative aspect-[16/9] w-full overflow-hidden border-b border-border bg-background">
+        <img
+          src={dashboard.image}
+          alt={`Power BI ${dashboard.title} preview`}
+          className="h-full w-full object-cover object-top transition-transform duration-500 hover:scale-[1.02]"
+          loading="lazy"
+          decoding="async"
+        />
+      </div>
+      <div className="flex flex-1 flex-col p-6 md:p-8">
+        <p className="label-mono">{dashboard.category}</p>
+        <h3 className="mt-4 text-xl font-semibold tracking-tight text-balance">
+          {dashboard.title}
+        </h3>
+        <p className="mt-3 text-sm leading-relaxed text-muted-foreground">{dashboard.description}</p>
+        
+        {dashboard.insights && dashboard.insights.length > 0 && (
+          <ul className="mt-4 list-inside list-disc space-y-1 text-sm text-muted-foreground">
+            {dashboard.insights.map((insight, i) => (
+              <li key={i}>{insight}</li>
+            ))}
+          </ul>
+        )}
+
+        <ul className="mt-6 flex flex-wrap gap-2">
+          {dashboard.tools.map((t) => (
+            <li key={t}>
+              <Tag>{t}</Tag>
+            </li>
+          ))}
+        </ul>
+        
+        <div className="mt-auto pt-7 flex flex-wrap gap-3">
+          {dashboard.dashboardUrl && (
+            <CtaAnchor
+              href={dashboard.dashboardUrl}
+              external
+              variant="primary"
+              onClick={() => track("live_demo_click", { project: dashboard.id })}
+            >
+              View Dashboard <Arrow />
+            </CtaAnchor>
+          )}
+          {dashboard.caseStudyUrl && (
+            <CtaLink
+              to={dashboard.caseStudyUrl}
+              variant="secondary"
+              onClick={() => track("project_case_study_open", { project: dashboard.id })}
+            >
+              Read Case Study <Arrow />
+            </CtaLink>
+          )}
+          {(!dashboard.dashboardUrl && !dashboard.caseStudyUrl) && (
+            <span className="inline-flex items-center rounded-md bg-background px-3 py-1.5 text-xs font-medium text-muted-foreground border border-border">
+              Dashboard Preview
+            </span>
+          )}
+        </div>
+      </div>
+    </Card>
   );
 }
 

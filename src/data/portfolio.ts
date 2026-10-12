@@ -506,3 +506,27 @@ export const projects: Project[] = [
 ];
 
 export const getProject = (slug: string) => projects.find((p) => p.slug === slug);
+
+export type Dashboard = {
+  id: string;
+  title: string;
+  description: string;
+  image: string;
+  category: string;
+  tools: string[];
+  insights?: string[];
+  dashboardUrl?: string;
+  caseStudyUrl?: string;
+};
+
+export const dashboards: Dashboard[] = [
+  {
+    id: "star-object-classification",
+    title: "Star Object Classification Dashboard",
+    description: "A Power BI dashboard for exploring and visualizing astronomical object data. The report preview should help visitors understand the classification-focused analysis.",
+    image: "/StarObjectClassification.png",
+    category: "Astronomy & Data Analytics",
+    tools: ["Power BI"],
+  }
+];
+

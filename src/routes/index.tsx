@@ -3,6 +3,7 @@ import {
   AboutSection,
   ContactCTA,
   CurrentBuild,
+  DashboardsSection,
   Hero,
   PortfolioBriefCTA,
   ProofMetrics,
@@ -32,6 +33,7 @@ function Home() {
       <Hero />
       <ProofMetrics />
       <SelectedWork />
+      <DashboardsSection />
       <ThinkingFramework />
       <AboutSection />
       <TechnicalToolkit />
