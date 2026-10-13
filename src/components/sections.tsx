@@ -1,5 +1,14 @@
 import { Link } from "@tanstack/react-router";
-import { ArrowUpRight, ChevronDown, Github, Linkedin, Mail, MapPin, Clock, Briefcase } from "lucide-react";
+import {
+  ArrowUpRight,
+  ChevronDown,
+  Github,
+  Linkedin,
+  Mail,
+  MapPin,
+  Clock,
+  Briefcase,
+} from "lucide-react";
 import { useState } from "react";
 import {
   achievements,
@@ -16,7 +25,15 @@ import {
   type Project,
 } from "@/data/portfolio";
 import { CountUp, Reveal } from "@/components/motion";
-import { Arrow, Card, CtaAnchor, CtaLink, SectionHeading, Stat, Tag } from "@/components/primitives";
+import {
+  Arrow,
+  Card,
+  CtaAnchor,
+  CtaLink,
+  SectionHeading,
+  Stat,
+  Tag,
+} from "@/components/primitives";
 import { ProjectVisual } from "@/components/visuals";
 import { mailto, RESUME_URL, track } from "@/lib/site";
 import { cn } from "@/lib/utils";
@@ -77,10 +94,7 @@ function AvailabilityBadge() {
         <span>Open to Data Science &amp; AI/ML roles</span>
         <ChevronDown
           size={12}
-          className={cn(
-            "transition-transform duration-200",
-            open && "rotate-180 text-success",
-          )}
+          className={cn("transition-transform duration-200", open && "rotate-180 text-success")}
           aria-hidden="true"
         />
       </button>
@@ -98,17 +112,12 @@ function AvailabilityBadge() {
             </div>
             <ul className="mt-3 space-y-1.5">
               {roles.slice(0, 3).map((r) => (
-                <li
-                  key={r}
-                  className="text-sm text-foreground flex items-center gap-2"
-                >
+                <li key={r} className="text-sm text-foreground flex items-center gap-2">
                   <span className="h-1 w-1 rounded-full bg-primary" />
                   {r}
                 </li>
               ))}
-              <li className="text-xs text-muted-foreground pl-3">
-                + {roles.length - 3} more
-              </li>
+              <li className="text-xs text-muted-foreground pl-3">+ {roles.length - 3} more</li>
             </ul>
           </div>
 
@@ -147,8 +156,6 @@ function AvailabilityBadge() {
   );
 }
 
-
-
 export function Hero() {
   return (
     <section className="relative overflow-hidden border-b border-border">
@@ -175,20 +182,15 @@ export function Hero() {
           </h1>
 
           <p className="body-lg mt-7 max-w-xl text-muted-foreground text-pretty">
-            I work across machine learning, statistical analytics and predictive
-            modelling — from automated ETL and feature engineering through model
-            benchmarking, to SHAP-based explainability, Monte Carlo simulation and
-            generative AI layered into applications people can actually use.
+            I work across machine learning, statistical analytics and predictive modelling — from
+            automated ETL and feature engineering through model benchmarking, to SHAP-based
+            explainability, Monte Carlo simulation and generative AI layered into applications
+            people can actually use.
           </p>
           <p className="mt-4 text-sm text-muted-foreground">{profile.disciplines}</p>
 
-
           <div className="mt-9 flex flex-wrap gap-3">
-            <CtaLink
-              to="/projects"
-              variant="primary"
-              onClick={() => track("hero_view_work_click")}
-            >
+            <CtaLink to="/projects" variant="primary" onClick={() => track("hero_view_work_click")}>
               View My Work <Arrow />
             </CtaLink>
             <CtaLink
@@ -257,9 +259,7 @@ export function FeaturedProject({ project, index }: { project: Project; index: n
       >
         <div className="min-w-0">
           <div className="flex flex-wrap items-center gap-3">
-            <span className="label-mono">
-              {String(index + 1).padStart(2, "0")} — Featured
-            </span>
+            <span className="label-mono">{String(index + 1).padStart(2, "0")} — Featured</span>
             {project.badge ? (
               <span className="rounded-full bg-[color-mix(in_oklab,var(--warning)_12%,transparent)] px-3 py-1 text-xs font-medium text-warning">
                 {project.badge}
@@ -334,9 +334,7 @@ export function ProjectCard({ project }: { project: Project }) {
   return (
     <Card interactive className="flex h-full flex-col">
       <p className="label-mono">{project.category}</p>
-      <h3 className="mt-4 text-xl font-semibold tracking-tight text-balance">
-        {project.title}
-      </h3>
+      <h3 className="mt-4 text-xl font-semibold tracking-tight text-balance">{project.title}</h3>
       <p className="mt-3 text-sm leading-relaxed text-muted-foreground">{project.summary}</p>
       <ul className="mt-6 flex flex-wrap gap-2">
         {project.tech.slice(0, 5).map((t) => (
@@ -437,8 +435,10 @@ function DashboardCard({ dashboard }: { dashboard: Dashboard }) {
         <h3 className="mt-4 text-xl font-semibold tracking-tight text-balance">
           {dashboard.title}
         </h3>
-        <p className="mt-3 text-sm leading-relaxed text-muted-foreground">{dashboard.description}</p>
-        
+        <p className="mt-3 text-sm leading-relaxed text-muted-foreground">
+          {dashboard.description}
+        </p>
+
         {dashboard.insights && dashboard.insights.length > 0 && (
           <ul className="mt-4 list-inside list-disc space-y-1 text-sm text-muted-foreground">
             {dashboard.insights.map((insight, i) => (
@@ -454,7 +454,7 @@ function DashboardCard({ dashboard }: { dashboard: Dashboard }) {
             </li>
           ))}
         </ul>
-        
+
         <div className="mt-auto pt-7 flex flex-wrap gap-3">
           {dashboard.dashboardUrl && (
             <CtaAnchor
@@ -467,15 +467,16 @@ function DashboardCard({ dashboard }: { dashboard: Dashboard }) {
             </CtaAnchor>
           )}
           {dashboard.caseStudyUrl && (
-            <CtaLink
-              to={dashboard.caseStudyUrl}
+            <CtaAnchor
+              href={dashboard.caseStudyUrl}
+              external={dashboard.caseStudyUrl.startsWith("http")}
               variant="secondary"
               onClick={() => track("project_case_study_open", { project: dashboard.id })}
             >
               Read Case Study <Arrow />
-            </CtaLink>
+            </CtaAnchor>
           )}
-          {(!dashboard.dashboardUrl && !dashboard.caseStudyUrl) && (
+          {!dashboard.dashboardUrl && !dashboard.caseStudyUrl && (
             <span className="inline-flex items-center rounded-md bg-background px-3 py-1.5 text-xs font-medium text-muted-foreground border border-border">
               Dashboard Preview
             </span>
@@ -569,25 +570,26 @@ export function AboutSection({ compact = false }: { compact?: boolean }) {
           />
           <div className="mt-7 space-y-5 text-muted-foreground body-lg">
             <p>
-              I'm Yash Modi — a Data Scientist and AI/ML Engineer from Bharuch, Gujarat.
-              I build systems that take noisy, real-world data and turn it into explained,
-              actionable decisions recruiters, stakeholders and decision-makers can trust.
+              I'm Yash Modi — a Data Scientist and AI/ML Engineer from Bharuch, Gujarat. I build
+              systems that take noisy, real-world data and turn it into explained, actionable
+              decisions recruiters, stakeholders and decision-makers can trust.
             </p>
             <p>
-              I trained as a physicist — an M.Sc. in Spectroscopy built on statistical
-              analysis, quantitative reasoning and the interpretation of experimental data.
-              That work is where I learned to treat measurement error, uncertainty and
-              evidence as first-class parts of a conclusion rather than footnotes.
+              I trained as a physicist — an M.Sc. in Spectroscopy built on statistical analysis,
+              quantitative reasoning and the interpretation of experimental data. That work is where
+              I learned to treat measurement error, uncertainty and evidence as first-class parts of
+              a conclusion rather than footnotes.
             </p>
             <p>
-              I moved into Data Science through a Post Graduate Diploma, where I finished
-              first in class, and applied the same discipline to commercial problems:
-              retail banking churn risk, manufacturing defect reduction, statistical sports
-              simulation and open-data classification.
+              I moved into Data Science through a Post Graduate Diploma, where I finished first in
+              class, and applied the same discipline to commercial problems: retail banking churn
+              risk, manufacturing defect reduction, statistical sports simulation and open-data
+              classification.
             </p>
             <p>
               <span className="text-foreground font-medium">
-                Turning complex data into structured thinking, practical analysis, and meaningful decisions.
+                Turning complex data into structured thinking, practical analysis, and meaningful
+                decisions.
               </span>
             </p>
           </div>
@@ -626,7 +628,8 @@ export function AboutSection({ compact = false }: { compact?: boolean }) {
               </ul>
               <p className="label-mono mt-6 mb-3">Domains</p>
               <p className="text-sm text-muted-foreground">
-                Banking Risk · Sports Intelligence · Manufacturing Quality · Open-Data Classification
+                Banking Risk · Sports Intelligence · Manufacturing Quality · Open-Data
+                Classification
               </p>
             </div>
           </div>
@@ -760,9 +763,7 @@ export function Recognition() {
           {achievements.map((a, i) => (
             <div key={a.headline} className="bg-surface p-6 md:p-8">
               <Reveal delay={i * 40}>
-                <h3 className="text-lg font-semibold tracking-tight text-balance">
-                  {a.headline}
-                </h3>
+                <h3 className="text-lg font-semibold tracking-tight text-balance">{a.headline}</h3>
                 <p className="mt-3 text-sm leading-relaxed text-muted-foreground">{a.body}</p>
               </Reveal>
             </div>
@@ -821,10 +822,7 @@ export function CurrentBuild() {
             </div>
             <div className="shrink-0">
               <div className="flex items-center gap-3 rounded-lg border border-border bg-background px-4 py-3">
-                <span
-                  aria-hidden="true"
-                  className="h-2 w-2 rounded-full bg-warning"
-                />
+                <span aria-hidden="true" className="h-2 w-2 rounded-full bg-warning" />
                 <span className="font-mono text-xs tracking-wider text-warning">
                   {currentBuild.status.toUpperCase()}
                 </span>
@@ -855,9 +853,9 @@ export function PortfolioBriefCTA() {
             Looking for the fastest way to review my work?
           </h2>
           <p className="body-lg mt-5 max-w-xl text-muted-foreground">
-            A three-page executive overview: positioning, proof metrics, flagship work,
-            how I approach problems, toolkit, education and recognition. Readable in the
-            browser, printable to PDF, no email required.
+            A three-page executive overview: positioning, proof metrics, flagship work, how I
+            approach problems, toolkit, education and recognition. Readable in the browser,
+            printable to PDF, no email required.
           </p>
         </div>
         <CtaLink
@@ -880,9 +878,9 @@ export function ContactCTA() {
           <p className="label-mono">Contact</p>
           <h2 className="display-1 mt-5 text-balance">Let&apos;s build something intelligent.</h2>
           <p className="body-lg mt-6 text-muted-foreground text-pretty">
-            I am open to Data Science, AI/ML and analytics roles where the work involves
-            real modelling, intelligent data products and business-oriented analytical
-            problems. If there is a fit, I would be glad to talk.
+            I am open to Data Science, AI/ML and analytics roles where the work involves real
+            modelling, intelligent data products and business-oriented analytical problems. If there
+            is a fit, I would be glad to talk.
           </p>
 
           <div className="mt-9 flex flex-wrap gap-3">
